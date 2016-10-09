@@ -1,18 +1,20 @@
 package gfi.entities;
 
-import java.time.Instant;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Biel on 8/10/2016.
  */
 public class Event {
-    Animation  animation;
+    Animation animation;
     Date startInstant;
+    UUID uuid;
 
     public Event(Animation animation, Date startInstant) {
         this.animation = animation;
         this.startInstant = startInstant;
+        uuid = UUID.randomUUID();
     }
 
     public Animation getAnimation() {
@@ -23,16 +25,11 @@ public class Event {
         this.animation = animation;
     }
 
-    Date getStartInstant() {
+    public Date getStartInstant() {
         return startInstant;
     }
 
     public void setStartInstant(Date startInstant) {
         this.startInstant = startInstant;
     }
-
-    public Long getTimeToStart(){
-        return (startInstant.getTime() - new Date().getTime());
-    }
-
 }

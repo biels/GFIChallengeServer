@@ -3,11 +3,11 @@ package gfi.entities;
 /**
  * Created by Biel on 8/10/2016.
  */
-public class AnimationFrame {
+public class SequenceFrame {
     String color;
     int time;
 
-    public AnimationFrame(String color, int time) {
+    public SequenceFrame(String color, int time) {
         this.color = color;
         this.time = time;
     }

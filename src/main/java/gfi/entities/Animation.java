@@ -1,23 +1,58 @@
 package gfi.entities;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 
 /**
- * Created by Biel on 8/10/2016.
+ * Created by Biel on 9/10/2016.
  */
 public class Animation {
-    List<AnimationFrame> animationFrames = new ArrayList<>();
+    List<Sequence> sequences = new ArrayList<>();
 
-    public void add(AnimationFrame element) {
-        animationFrames.add(element);
+    public Animation(File file, int size) {
+        File anim = new File(file.getPath() + "/anim.txt");
+        try {
+
+            for(int i = 0; i < size; i++){
+                for(int j = 0; j < size; j++){
+                    //one sequence
+                    Scanner mainSc = new Scanner(anim);
+                    Sequence seq = new Sequence();
+                    BufferedImage image;
+                    try {
+                        while (mainSc.hasNext()){
+                            Scanner frameSc = new Scanner(mainSc.nextLine());
+                            String imgName = mainSc.next();
+                            int milis = frameSc.nextInt();
+                            image = ImageIO.read(new File(file.getPath() + "/" + imgName + ".bmp"));
+                            String hex = "#" + Integer.toHexString(image.getRGB(i, j)).toUpperCase();
+                            seq.add(new SequenceFrame(hex, milis));
+                        }
+                        sequences.add(seq);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
-    public List<AnimationFrame> getAnimationFrames() {
-        return animationFrames;
-    }
-
-    public void setAnimationFrames(List<AnimationFrame> animationFrames) {
-        this.animationFrames = animationFrames;
+    public List<Sequence> getSequences() {
+        return sequences;
     }
 }
