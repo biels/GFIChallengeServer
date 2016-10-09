@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 
 /**
@@ -28,9 +29,10 @@ public class Animation {
                     BufferedImage image;
                     try {
                         while (mainSc.hasNext()){
-                            Scanner frameSc = new Scanner(mainSc.nextLine());
-                            String imgName = mainSc.next();
-                            int milis = frameSc.nextInt();
+                            String line = mainSc.nextLine();
+                            String[] arr = line.split(" ");
+                            String imgName = arr[0];
+                            int milis = Integer.parseInt(arr[1]);
                             image = ImageIO.read(new File(file.getPath() + "/" + imgName + ".bmp"));
                             String hex = "#" + Integer.toHexString(image.getRGB(i, j)).toUpperCase();
                             seq.add(new SequenceFrame(hex, milis));
