@@ -9,11 +9,13 @@ import java.util.UUID;
 public class Event {
     Animation animation;
     Date startInstant;
+    int times;
     UUID uuid;
 
     public Event(Animation animation, Date startInstant) {
         this.animation = animation;
         this.startInstant = startInstant;
+        this.times = times;
         uuid = UUID.randomUUID();
     }
 
@@ -31,5 +33,24 @@ public class Event {
 
     public void setStartInstant(Date startInstant) {
         this.startInstant = startInstant;
+    }
+    public Long getTimeToStart(){
+        return startInstant.getTime() - new Date().getTime();
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public int getTimes() {
+        return times;
+    }
+
+    public void setTimes(int times) {
+        this.times = times;
     }
 }

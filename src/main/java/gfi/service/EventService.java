@@ -1,9 +1,6 @@
 package gfi.service;
 
-import gfi.entities.Animation;
-import gfi.entities.Sequence;
-import gfi.entities.SequenceFrame;
-import gfi.entities.Event;
+import gfi.entities.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
@@ -24,8 +21,8 @@ public class EventService {
         return currentEvent;
     }
     @RequestMapping("/sequence/{id}")
-    Sequence getSequence(@NotNull @PathVariable Integer id){
-        return currentEvent.getAnimation().getSequences().get(id);
+    ScheduledSequence getSequence(@NotNull @PathVariable Integer id){
+        return new ScheduledSequence(currentEvent.getTimeToStart(), currentEvent.getAnimation().getSequences().get(id), currentEvent.getUuid());
     }
     @RequestMapping(value = "", method = RequestMethod.POST)
     String setEvent(@RequestParam String name, @RequestParam Integer delay){
